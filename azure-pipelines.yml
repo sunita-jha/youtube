@@ -41,16 +41,16 @@ extends:
     buildType: 'dockerBuild'
     registry: 'ACR'
     sourcecode: github
-#steps:
-#- task: Docker@2
-#  inputs:
-#    containerRegistry: 'acr-adipricer-poc'
+# steps:
+# - task: Docker@2
+#   inputs:
+#     containerRegistry: 'acr-adipricer-poc'
 #     repository: 'adipricerpoc'
 #     command: 'buildAndPush'
 #     Dockerfile: '**/Dockerfile'
-#   tags: |
-#     latest
-#     $(Build.BuildId)
+#     tags: |
+#      latest
+#      $(Build.BuildId)
 
 #- task: AzureCLI@2
 # inputs:
