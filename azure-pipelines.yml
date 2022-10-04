@@ -15,7 +15,7 @@ pool:
   vmImage: ubuntu-latest
 variables:
   registry:  adipricerpocregistry.azurecr.io
-  DOCKER-REPOSITORY-NAME: adipricerpoc
+  DOCKER-REPOSITORY-NAME: adipricerpoc1
   dockerfilePath: '**/Dockerfile'
   azureSubscription: 'sp-dev-jenkins'
   dockerRegistryServiceConnection: 'acr-adipricer-poc'
