@@ -6,7 +6,7 @@ app = FastAPI()
 
 @app.get("/")
 def index():
-    return { "message": "hello world"}
+    return { "message": "hello world from Team Analog"}
 
 if __name__ == "__main__":
     uvicorn.run("main:app", port=8000, reload=True)
