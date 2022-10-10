@@ -34,13 +34,25 @@ resources:
  #    type: github
  #     name: sunita-jha/docker-demo-with-simple-python-app
  #     ref: refs/heads/$(branchName)
-extends:
-  template: pipeline-dev-docker-common.yml@templates
-  parameters:
-    targetApp: 'containerapp'
-    buildType: 'dockerBuild'
-    registry: 'ACR'
-    sourcecode: github
+# extends:
+#   template: pipeline-dev-docker-common.yml@templates
+#   parameters:
+#     targetApp: 'containerapp'
+#     buildType: 'dockerBuild'
+#     registry: 'ACR'
+#     sourcecode: github
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'sunita_test'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az acr import \
+        --name sunitademo \
+        --source adipricerpocregistry/adipricerpoc1:latest \
+        --image adipricerpoc1:latest \
+        --registry /subscriptions/sp-dev-jenkins/resourceGroups/adi-eus-devops-poc-rg/providers/Microsoft.ContainerRegistry/registries/adipricerpocregistry
 # steps:
 # - task: Docker@2
 #   inputs:
