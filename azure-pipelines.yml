@@ -64,10 +64,10 @@ steps:
       az config set extension.use_dynamic_install=yes_without_prompt
       az containerapp update -n testapp1 -g adi-eus-devops-poc-rg \
           --image sunitademo.azurecr.io/sunitajha2:11 \
+          --container-name directdeploy 
           # --registry-server sunitademo.azurecr.io \
           # --registry-username sunitademo \
           # --registry-password zrZW87iETyQUsLtndKAXm5gOQIKLIM/2
-          --container-name directdeploy
 # steps:
 # - task: Docker@2
 #   inputs:
