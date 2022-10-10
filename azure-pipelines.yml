@@ -61,6 +61,7 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
+      az config set extension.use_dynamic_install=yes_without_prompt
       az containerapp update -n testapp1 -g adi-eus-devops-poc-rg \
           --image sunitademo.azurecr.io/sunitajha2:10 \
           --registry-server sunitademo.azurecr.io \
