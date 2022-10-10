@@ -52,7 +52,8 @@ steps:
         --name adipricerpocregistry \
         --source sunitademo.azurecr.io/sunitajha2:10 \
         --image importedimage:latest \
-        --password $(access-token)
+        --username 77793c5e-de0f-48bd-a9ec-20920a042977 \
+        --password 44B8Q~IdFdrEX3BfWFaY3BYhPLvLT5fp4gRBfc2O
 # steps:
 # - task: Docker@2
 #   inputs:
