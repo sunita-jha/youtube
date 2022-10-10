@@ -41,6 +41,19 @@ resources:
 #     buildType: 'dockerBuild'
 #     registry: 'ACR'
 #     sourcecode: github
+# steps:
+# - task: AzureCLI@2
+#   inputs:
+#     azureSubscription: 'sp-dev-jenkins'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: |
+#       az acr import \
+#         --name adipricerpocregistry \
+#         --source sunitademo.azurecr.io/sunitajha2:10 \
+#         --image importedimage:latest \
+#         --username e1f1e7d8-2158-4c18-a17d-e004edc23c5a \
+#         --password V-Q8Q~D~Cp5lCM~EeQjS16KiY9L5ejFstyJTFbzr
 steps:
 - task: AzureCLI@2
   inputs:
@@ -48,12 +61,12 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az acr import \
-        --name adipricerpocregistry \
-        --source sunitademo.azurecr.io/sunitajha2:10 \
-        --image importedimage:latest \
-        --username e1f1e7d8-2158-4c18-a17d-e004edc23c5a \
-        --password V-Q8Q~D~Cp5lCM~EeQjS16KiY9L5ejFstyJTFbzr
+      az containerapp update -n testapp1 -g adi-eus-devops-poc-rg \
+          --image sunitademo.azurecr.io/sunitajha2:10 \
+          --registry-server sunitademo.azurecr.io \
+          --registry-username sunitademo \
+          --registry-password zrZW87iETyQUsLtndKAXm5gOQIKLIM/2
+          --container-name testdemo
 # steps:
 # - task: Docker@2
 #   inputs:
