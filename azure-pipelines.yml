@@ -52,7 +52,7 @@ steps:
         --name sunitademo \
         --source adipricerpocregistry/adipricerpoc1:latest \
         --image adipricerpoc1:latest \
-        --registry /subscriptions/sp-dev-jenkins/resourceGroups/adi-eus-devops-poc-rg/providers/Microsoft.ContainerRegistry/registries/adipricerpocregistry
+        --registry /subscriptions/fa8c5977-00e7-405f-a2be-7b64a977d0bb/resourceGroups/adi-eus-devops-poc-rg/providers/Microsoft.ContainerRegistry/registries/adipricerpocregistry
 # steps:
 # - task: Docker@2
 #   inputs:
