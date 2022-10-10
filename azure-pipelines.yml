@@ -44,15 +44,15 @@ resources:
 steps:
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'sunita_test'
+    azureSubscription: 'sp-dev-jenkins'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
       az acr import \
-        --name sunitademo \
-        --source adipricerpocregistry/adipricerpoc1:latest \
-        --image adipricerpoc1:latest \
-        --registry /subscriptions/fa8c5977-00e7-405f-a2be-7b64a977d0bb/resourceGroups/adi-eus-devops-poc-rg/providers/Microsoft.ContainerRegistry/registries/adipricerpocregistry
+        --name adipricerpocregistry \
+        --source sunitademo.azurecr.io/sunitajha2:10 \
+        --image importedimage:latest \
+        --password $(access-token)
 # steps:
 # - task: Docker@2
 #   inputs:
