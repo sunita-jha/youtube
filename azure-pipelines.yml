@@ -14,46 +14,20 @@ parameters:
 pool:
   vmImage: ubuntu-latest
 variables:
-  registry:  adipricerpocregistry.azurecr.io
-  DOCKER-REPOSITORY-NAME: adipricerpoc1
-  dockerfilePath: '**/Dockerfile'
+  # registry:  adipricerpocregistry.azurecr.io
+  # DOCKER-REPOSITORY-NAME: importedimage
+  # dockerfilePath: '**/Dockerfile'
   azureSubscription: 'sp-dev-jenkins'
   dockerRegistryServiceConnection: 'acr-adipricer-poc'
-  containerappname: 'testapp1'
+  containerappname: 'adi-poc-containerapp-two-acr'
   resourcegroupname: adi-eus-devops-poc-rg
   containername: adipricerpoc
+  targetRegistry: adipricerpocregistry
+  sourceRegistry: sunitademo
+  targetRepo : importedimage
+  sourceRepo : sunitajha2
 
-resources: 
-   repositories:
-    - repository: templates
-      type: git
-      name: enterpriseapps-devops/corpit-templates-library
-      ref: refs/heads/sjha3-containerapp
- #   - repository: sourcecoderepo
- #     endpoint: SourceCodeRepoCheckOut
- #    type: github
- #     name: sunita-jha/docker-demo-with-simple-python-app
- #     ref: refs/heads/$(branchName)
-# extends:
-#   template: pipeline-dev-docker-common.yml@templates
-#   parameters:
-#     targetApp: 'containerapp'
-#     buildType: 'dockerBuild'
-#     registry: 'ACR'
-#     sourcecode: github
-# steps:
-# - task: AzureCLI@2
-#   inputs:
-#     azureSubscription: 'sp-dev-jenkins'
-#     scriptType: 'bash'
-#     scriptLocation: 'inlineScript'
-#     inlineScript: |
-#       az acr import \
-#         --name adipricerpocregistry \
-#         --source sunitademo.azurecr.io/sunitajha2:10 \
-#         --image importedimage:latest \
-#         --username e1f1e7d8-2158-4c18-a17d-e004edc23c5a \
-#         --password V-Q8Q~D~Cp5lCM~EeQjS16KiY9L5ejFstyJTFbzr
+
 steps:
 - task: AzureCLI@2
   inputs:
@@ -61,30 +35,21 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az config set extension.use_dynamic_install=yes_without_prompt
-      az containerapp update -n testapp1 -g adi-eus-devops-poc-rg \
-          --image sunitademo.azurecr.io/sunitajha2:11 \
-          --container-name directdeploy 
-          # --registry-server sunitademo.azurecr.io \
-          # --registry-username sunitademo \
-          # --registry-password zrZW87iETyQUsLtndKAXm5gOQIKLIM/2
+      az acr import \
+        --name $(targetRegistry) \
+        --source $(sourceRegistry).azurecr.io/$(sourceRepo):10 \
+        --image $(targetRepo):latest \
+        --username $(username) \
+        --password $(password)
 # steps:
-# - task: Docker@2
+# - task: AzureCLI@2
 #   inputs:
-#     containerRegistry: 'acr-adipricer-poc'
-#     repository: 'adipricerpoc'
-#     command: 'buildAndPush'
-#     Dockerfile: '**/Dockerfile'
-#     tags: |
-#      latest
-#      $(Build.BuildId)
-
-#- task: AzureCLI@2
-# inputs:
-#   azureSubscription: 'sp-dev-jenkins'
-#   scriptType: 'bash'
-#   scriptLocation: 'inlineScript'
-#   inlineScript: |
-#     az config set extension.use_dynamic_install=yes_without_prompt
-#     az containerapp update -n adi-poc-containerapp -g adi-eus-devops-poc-rg  --image $(registry)/$(image):$(imageTag) --container-name adipricerpoc   
-
+#     azureSubscription: 'sp-dev-jenkins'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: |
+#       az config set extension.use_dynamic_install=yes_without_prompt
+#       az containerapp update -n testapp1 -g adi-eus-devops-poc-rg \
+#           --image sunitademo.azurecr.io/sunitajha2:11 \
+#           --container-name directdeploy 
+ 
